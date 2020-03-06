@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "GetEventList";
+}
+
+@model EventRootobject
+
+<h1>GetEventList</h1>
+
+
+@for (int i = 0; i < Model._embedded.attractions.Length; i++)
+{
+
+    <a class="dropdown" -item" href="../TicketMaster/GetById?id=@(i+1)">@Model._embedded.attractions[i].name</a>
+
+}
