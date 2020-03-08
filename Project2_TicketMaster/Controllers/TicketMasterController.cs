@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Project2_TicketMaster.Models;
@@ -40,5 +41,7 @@ namespace Project2_TicketMaster.Controllers
         {
             return View();
         }
+
+        
     }
 }
