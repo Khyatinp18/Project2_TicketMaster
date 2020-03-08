@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Project2_TicketMaster.Models;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Project2_TicketMaster.Controllers
 {
@@ -20,18 +22,48 @@ namespace Project2_TicketMaster.Controllers
             _client = client.CreateClient();
             _client.BaseAddress = new Uri("https://app.ticketmaster.com/discovery/v2/");
         }
-
         [HttpGet]
-        public async Task<IActionResult> GetEventBySource(string source)
+        public IActionResult GetEventBySource()
         {
-            var response = await _client.GetAsync($"attractions.json?source={source}&apikey={ticketMasterApiKey}");
-            var events = await response.Content.ReadAsAsync<EventRootobject>();
-            return View(events);
+            return View("GetEventBySource");
         }
 
-        public async Task<IActionResult> GetEventList(int pages)
+        [HttpGet]
+        public IActionResult GetEventByCountry()
         {
-            var response = await _client.GetAsync($"attractions.json?apikey={ticketMasterApiKey}");
+            return View("GetEventByCountry");
+        }
+        [HttpPost]
+        public async Task<IActionResult> GetEventBySource(string source, int page)
+        {
+            int pageOption;
+            if (page == 0)
+            {
+                pageOption = 0;
+            }
+
+            else
+            {
+                pageOption = page;
+            }
+            var response = await _client.GetAsync($"attractions.json?apikey={ticketMasterApiKey}&page={pageOption}&source={source}");
+            var events = await response.Content.ReadAsAsync<EventRootobject>();
+            return View("GetEventList",events);
+        }
+
+        public async Task<IActionResult> GetEventList(int page)
+        {
+            int pageOption;
+            if (page == 0)
+            {
+                pageOption = 0;
+            }
+
+            else
+            {
+                pageOption = page;
+            }
+            var response = await _client.GetAsync($"attractions.json?apikey={ticketMasterApiKey}&page={pageOption}");
             var events = await response.Content.ReadAsAsync<EventRootobject>();
             return View(events);
         }

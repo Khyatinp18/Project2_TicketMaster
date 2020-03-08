@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewData["Title"] = "GetEventByCountry";
+}
+
+<h1>Get Events By Country</h1>
+
+<form action="../TicketMaster/GetEventByCountry" method="post">
+    @Html.DropDownList("country", new SelectList(Enum.GetValues(typeof(Country))),
+        "Source", new { @class = "form-control" })
+    <input type="submit" name="name" value="Select Country" />
+</form>
+
