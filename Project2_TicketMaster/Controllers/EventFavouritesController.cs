@@ -16,6 +16,17 @@ namespace Project2_TicketMaster.Controllers
             _context = context;
         }
 
+        //public async Task<IActionResult> AddToFavorites(Favourite favourite)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+
+        //        _context.Favourite.Add(favourite);
+        //        _context.SaveChanges();
+        //    }
+        //    return View();
+        //}
+
         public IActionResult Index()
         {
             return View();

@@ -1,28 +1,44 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "GetEventList";
 }
 
-@model _Embedded
+@model EventRootobject
 
 <h1>Get Event List</h1>
 
-<div class="table-bordered">
-<table>
-    <tr>
-        <th>Event</th>
-        <th>Event Type</th>
-        <th>Event URL</th>
-    </tr>
-    @for (int i = 0; i < @Model.attractions.Length; i++)
-    {
-<tr>
-    <td>@Model.attractions[i].name</td>
-    <td>@Model.attractions[i].type</td>
-    <td><a href="@Model.attractions[i].url">Link to @Model.attractions[i].name Event</a></td>
-    <td><a href="@Model.attractions[i]">Link to Pics of @Model.attractions[i].name Event</a></td>
 
-</tr>
-    }
-</table>
+<div style="margin:auto;">
+
+    <table style="text-align:center;" class="table table-bordered ">
+        <tr>
+            <th>Name</th>
+            <th>Attraction Type</th>
+            <th>Url</th>
+            <th>Location</th>
+            <th>Image</th>
+            <th>Add to Favourites</th>
+        </tr>
+
+
+
+        @for (int i = 0; i < Model._embedded.attractions.Length; i++)
+        {
+            <tr>
+                <td>@Model._embedded.attractions[i].name</td>
+                <td>@Model._embedded.attractions[i].type</td>
+                <td><a href="@Model._embedded.attractions[i].url">Link to @Model._embedded.attractions[i].name Event</a></td>
+                <td>@Model._embedded.attractions[i].locale</td>
+                <td><a href="@Model._embedded.attractions[i].images">Link to @Model._embedded.attractions[i].name Image</a></td>
+                @*<td><img style="width:200px;" src="@Model._embedded.attractions[i].images" /></td>*@
+
+                <td><a class="btn btn-outline-success" href="../EventFavourites/AddToFavorites?id=@Model._embedded.attractions[i].id">Add To Favorite</a></td>
+            </tr>
+        }
+
+    </table>
+
+    @*<form action="../TicketMaster/GetEventList" method="post">
+
+        </form>*@
 </div>
+>>>>>>> 0069dd7fa805ca06ee5cacce5cdc71ec858bafa0
