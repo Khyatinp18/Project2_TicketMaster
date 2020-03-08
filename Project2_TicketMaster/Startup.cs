@@ -31,9 +31,7 @@ namespace Project2_TicketMaster
             var connection = "Server=.\\SQLExpress;Database=EventFavourites;Trusted_Connection=True;ConnectRetryCount=0;";
 
             services.AddHttpClient();
-            services.AddDbContext<EventFavouritesContext>(
-            options => options.UseSqlServer(connection)
-            );
+            services.AddDbContext<EventFavouritesContext>(options => options.UseSqlServer(connection));
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));

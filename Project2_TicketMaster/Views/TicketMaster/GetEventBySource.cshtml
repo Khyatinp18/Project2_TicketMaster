@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewData["Title"] = "GetEventBySource";
+}
+
+<h1>Get Event By Source</h1>
+
+<form action="../TicketMaster/GetEventBySource" method="post">
+    @Html.DropDownList("sourceName", new SelectList(Enum.GetValues(typeof(SourceName))),
+        "Source", new { @class = "form-control" })
+    <input type="submit" name="name" value="Select Source" />
+</form>

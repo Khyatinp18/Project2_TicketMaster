@@ -21,12 +21,28 @@ namespace Project2_TicketMaster.Controllers
             _client.BaseAddress = new Uri("https://app.ticketmaster.com/discovery/v2/");
         }
 
-        public async Task<IActionResult> GetEventList(int id)
+        [HttpGet]
+        public async Task<IActionResult> GetEventList()
         {
             var response = await _client.GetAsync($"attractions.json?apikey={ticketMasterApiKey}");
             var events = await response.Content.ReadAsAsync<EventRootobject>();
+            var attractions = events._embedded;
+            return View(attractions);
+        }
 
-            return View(events);
+        [HttpGet]
+        public async Task<IActionResult> GetEventBySource()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetEventBySource(string source)
+        {
+            var response = await _client.GetAsync($"attractions.json?source={source}&apikey={ticketMasterApiKey}");
+            var events = await response.Content.ReadAsAsync<EventRootobject>();
+
+            return View("GetEventList",events);
         }
 
         public IActionResult Index()

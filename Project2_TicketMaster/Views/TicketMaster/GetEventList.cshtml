@@ -3,14 +3,26 @@
     ViewData["Title"] = "GetEventList";
 }
 
-@model EventRootobject
+@model _Embedded
 
-<h1>GetEventList</h1>
+<h1>Get Event List</h1>
 
+<div class="table-bordered">
+<table>
+    <tr>
+        <th>Event</th>
+        <th>Event Type</th>
+        <th>Event URL</th>
+    </tr>
+    @for (int i = 0; i < @Model.attractions.Length; i++)
+    {
+<tr>
+    <td>@Model.attractions[i].name</td>
+    <td>@Model.attractions[i].type</td>
+    <td><a href="@Model.attractions[i].url">Link to @Model.attractions[i].name Event</a></td>
+    <td><a href="@Model.attractions[i]">Link to Pics of @Model.attractions[i].name Event</a></td>
 
-@for (int i = 0; i < Model._embedded.attractions.Length; i++)
-{
-
-    <a class="dropdown" -item" href="../TicketMaster/GetById?id=@(i+1)">@Model._embedded.attractions[i].name</a>
-
-}
+</tr>
+    }
+</table>
+</div>
