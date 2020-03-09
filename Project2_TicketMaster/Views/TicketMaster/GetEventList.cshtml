@@ -10,6 +10,9 @@
     <input type="submit" name="page" value="1" placeholder="1" />
     <input type="submit" name="page" value="2" placeholder="2" />
     <input type="submit" name="page" value="3" placeholder="3" />
+    <input type="submit" name="page" value="4" placeholder="4" />
+    <input type="submit" name="page" value="5" placeholder="5" />
+
 </form>
 <br />
     <table style="text-align:center;" class="table table-bordered ">
@@ -23,25 +26,38 @@
         </tr>
         @for (int i = 0; i < Model._embedded.attractions.Length; i++)
         {
-            <tr>
-                <td>@Model._embedded.attractions[i].name</td>
-                <td>@Model._embedded.attractions[i].type</td>
-                <td><a href="@Model._embedded.attractions[i].url">Link to @Model._embedded.attractions[i].name Event</a></td>
-                <td>@Model._embedded.attractions[i].locale</td>
-                <td><img style="width:200px;" src="@Model._embedded.attractions[i].images" /></td>
+    <tr>
+        <td>@Model._embedded.attractions[i].name</td>
+        <td>@Model._embedded.attractions[i].type</td>
+        <td><a href="@Model._embedded.attractions[i].url">Link to @Model._embedded.attractions[i].name Event</a></td>
+        <td>@Model._embedded.attractions[i].locale</td>
+        <td><img style="width:200px;" src="@Model._embedded.attractions[i].images[0].url" alt="Event Image" class="img-thumbnail" /></td>
+        <td>
+            <form action="../TicketMaster/ViewEventImages" method="post">
 
-                <td><a class="btn btn-outline-success" href="../EventFavourites/AddToFavorites?id=@Model._embedded.attractions[i].id">Add To Favorite</a></td>
-            </tr>
+                <input type="hidden" name="images" value="@this.Model._embedded.attractions[i].images" />
+                <input type="submit" name="submit" value="View Images of this Event" />
+            </form>
+        </td>
+        <td>
+            <form action="../EventFavourites/AddToFavorites" method="post">
+
+                <input type="hidden" name="name" value="@this.Model._embedded.attractions[i].name" />
+                <input type="hidden" name="type" value="@Model._embedded.attractions[i].type" />
+                <input type="hidden" name="url" value="@this.Model._embedded.attractions[i].url" />
+                <input type="hidden" name="locale" value="@Model._embedded.attractions[i].locale" />
+                <input type="submit" name="submit" value="Add to Favourite" />
+            </form>
+        </td>
+    </tr>
         }
 
     </table><br />
-    <form action="../TicketMaster/GetEventList" method="post">
-        <input type="submit" name="page" value="1" placeholder="1" />
-        <input type="submit" name="page" value="2" placeholder="2" />
-        <input type="submit" name="page" value="3" placeholder="3" />
-    </form>
-
-    @*<form action="../TicketMaster/GetEventList" method="post">
-
-        </form>*@
+            <form action="../TicketMaster/GetEventList" method="post">
+                <input type="submit" name="page" value="1" placeholder="1" />
+                <input type="submit" name="page" value="2" placeholder="2" />
+                <input type="submit" name="page" value="3" placeholder="3" />
+                <input type="submit" name="page" value="4" placeholder="4" />
+                <input type="submit" name="page" value="5" placeholder="5" />
+            </form>
 </div>

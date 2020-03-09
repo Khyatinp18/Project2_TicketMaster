@@ -21,19 +21,20 @@ namespace Project2_TicketMaster.Controllers
             _context = context;
         }
 
-        //public async Task<IActionResult> AddToFavorites(Favourite favourite)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
+        public IActionResult AddToFavorites(Attraction attraction)
+        {
+            string id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            Favourite newfavourite = new Favourite { OwnerId = id, Name = attraction.name, EventType = attraction.type, Url = attraction.url, Locale = attraction.locale };
+            if (ModelState.IsValid)
+            {
+                _context.Favourite.Add(newfavourite);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("FavouriteList");
+        }
 
-        //        _context.Favourite.Add(favourite);
-        //        _context.SaveChanges();
-        //    }
-        //    return View();
-        //}
 
-
-        public async Task<IActionResult> FavouriteList(Favourite newFavourite)
+        public IActionResult FavouriteList(Favourite newFavourite)
         {
             string id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             List<Favourite> favouriteList = _context.Favourite.Where(x => x.OwnerId == id).ToList();
