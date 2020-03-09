@@ -20,22 +20,15 @@ namespace Project2_TicketMaster.Controllers
         {
             _context = context;
         }       
-      
-
-        public IActionResult AddToFavorites(Attraction favourite)
+ 
+        public IActionResult AddToFavorites(Attraction attraction)
         {
-            Favourite newFavourite = new Favourite();
             string id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            newFavourite.OwnerId = id;
-            newFavourite.Name = favourite.name;
-            newFavourite.EventType = favourite.type;
-            newFavourite.Url = favourite.url;
-            newFavourite.Locale = favourite.locale;
-
-
+            Favourite newfavourite = new Favourite { OwnerId = id, Name = attraction.name, EventType = attraction.type, Url = attraction.url, Locale = attraction.locale };
+            
             if (ModelState.IsValid)
             {
-                _context.Favourite.Add(newFavourite);
+                _context.Favourite.Add(newfavourite);
                 _context.SaveChanges();
 
                 return RedirectToAction("FavouriteList");
@@ -46,8 +39,7 @@ namespace Project2_TicketMaster.Controllers
             }
         }
 
-
-        public async Task<IActionResult> FavouriteList(Favourite newFavourite)
+        public IActionResult FavouriteList()
         {
             string id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             List<Favourite> favouriteList = _context.Favourite.Where(x => x.OwnerId == id).ToList();

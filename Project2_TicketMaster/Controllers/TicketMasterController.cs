@@ -69,6 +69,10 @@ namespace Project2_TicketMaster.Controllers
             return View(events);
         }
 
+        public IActionResult ViewEventImages(Image[] images)
+        {
+            return View("ViewEventImages", images.ToList());
+        }
         public IActionResult Index()
         {
             return View();

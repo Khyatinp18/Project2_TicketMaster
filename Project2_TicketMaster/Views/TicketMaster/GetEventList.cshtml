@@ -10,6 +10,8 @@
         <input type="submit" name="page" value="1" placeholder="1" />
         <input type="submit" name="page" value="2" placeholder="2" />
         <input type="submit" name="page" value="3" placeholder="3" />
+        <input type="submit" name="page" value="4" placeholder="4" />
+        <input type="submit" name="page" value="5" placeholder="5" />
     </form>
     <br />
     <table style="text-align:center;" class="table table-bordered ">
@@ -30,25 +32,18 @@
                 <td>@Model._embedded.attractions[i].type</td>
                 <td><a href="@Model._embedded.attractions[i].url">Link to @Model._embedded.attractions[i].name Event</a></td>
                 <td>@Model._embedded.attractions[i].locale</td>
-                <td><img style="width:200px;" src="@Model._embedded.attractions[i].images" /></td>
-
-
-
+                <td><img style="width:200px;" src="@Model._embedded.attractions[i].images[0].url" alt="Event Image" class="img-thumbnail" /></td>
                 <td>
                     <form action="../EventFavourites/AddToFavorites" method="post">
-
-                        <input type="hidden" name="Name" value="@Model._embedded.attractions[i].name" />
-                        <input type="hidden" name="Type" value="@Model._embedded.attractions[i].type" />
-                        <input type="hidden" name="Url" value="@Model._embedded.attractions[i].url" />
-                        <input type="hidden" name="Locale" value="@Model._embedded.attractions[i].locale" />
-                        <button type="submit" name="Submit" class="btn btn-outline-success">Add to Favourite</button>
-
+                        <input type="hidden" name="name" value="@this.Model._embedded.attractions[i].name" />
+                        <input type="hidden" name="type" value="@Model._embedded.attractions[i].type" />
+                        <input type="hidden" name="url" value="@this.Model._embedded.attractions[i].url" />
+                        <input type="hidden" name="locale" value="@Model._embedded.attractions[i].locale" />
+                        <input type="submit" class="btn btn-outline-success" value="Add to Favourite" />
                     </form>
                 </td>
             </tr>
         }
-
-
 
     </table>
     <br />
@@ -56,6 +51,8 @@
         <input type="submit" name="page" value="1" placeholder="1" />
         <input type="submit" name="page" value="2" placeholder="2" />
         <input type="submit" name="page" value="3" placeholder="3" />
+        <input type="submit" name="page" value="4" placeholder="4" />
+        <input type="submit" name="page" value="5" placeholder="5" />
     </form>
-
 </div>
+

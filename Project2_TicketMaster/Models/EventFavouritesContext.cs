@@ -157,14 +157,13 @@ namespace Project2_TicketMaster.Models
                 entity.Property(e => e.Url)
                     .IsRequired()
                     .HasColumnName("url")
-                    .HasMaxLength(1)
-                    .IsUnicode(false);
+                    .HasMaxLength(450);
 
                 entity.HasOne(d => d.Owner)
                     .WithMany(p => p.Favourite)
                     .HasForeignKey(d => d.OwnerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Favourite__owner__36B12243");
+                    .HasConstraintName("FK__Favourite__owner__02FC7413");
             });
 
             OnModelCreatingPartial(modelBuilder);
