@@ -6,25 +6,26 @@
 
 <h1>Your Favorites</h1>
 
-
-<table class="table">
-    <tr>
-        <th>Name</th>
-        <th>Attraction Type</th>
-        <th>Url</th>
-        <th>Location</th>
-        <th>Remove From Favourites</th>
-    </tr>
-
-    @foreach (Favourite favourite in Model)
-    {
+<div>
+    <table style="text-align:center;" class="table table-bordered ">
         <tr>
-            <td>@favourite.Name</td>
-            <td>@favourite.EventType</td>
-            <td>@favourite.Url</td>
-            <td>@favourite.Locale</td>
-            <td><a class="btn btn-outline-success" href="../EventFavourites/RemoveFromFavorites?id=@favourite.Id">Remove from Favourites</a></td>
-
+            <th>Name</th>
+            <th>Attraction Type</th>
+            <th>Url</th>
+            <th>Location</th>
+            <th>Remove From Favourites</th>
         </tr>
-    }
-</table>
+
+        @foreach (Favourite favourite in Model)
+        {
+            <tr>
+                <td>@favourite.Name</td>
+                <td>@favourite.EventType</td>
+                <td><a href="@favourite.Url">Link to @favourite.Name Event</a></td>
+                <td>@favourite.Locale</td>
+                <td><a class="btn btn-outline-danger" href="../EventFavourites/RemoveFromFavorites?id=@favourite.Id">Remove from Favourites</a></td>
+
+            </tr>
+        }
+    </table>
+</div>

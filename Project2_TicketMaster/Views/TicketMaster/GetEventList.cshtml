@@ -5,13 +5,13 @@
 @model EventRootobject
 
 <h1>Event's</h1>
-
-<form action="../TicketMaster/GetEventList" method="post">
-    <input type="submit" name="page" value="1" placeholder="1" />
-    <input type="submit" name="page" value="2" placeholder="2" />
-    <input type="submit" name="page" value="3" placeholder="3" />
-</form>
-<br />
+<div>
+    <form action="../TicketMaster/GetEventList" method="post">
+        <input type="submit" name="page" value="1" placeholder="1" />
+        <input type="submit" name="page" value="2" placeholder="2" />
+        <input type="submit" name="page" value="3" placeholder="3" />
+    </form>
+    <br />
     <table style="text-align:center;" class="table table-bordered ">
         <tr>
             <th>Name</th>
@@ -30,18 +30,30 @@
                 <td>@Model._embedded.attractions[i].locale</td>
                 <td><img style="width:200px;" src="@Model._embedded.attractions[i].images" /></td>
 
-                <td><a class="btn btn-outline-success" href="../EventFavourites/AddToFavorites?id=@Model._embedded.attractions[i].id">Add To Favorite</a></td>
+
+
+                <td>
+                    <form action="../EventFavourites/AddToFavorites" method="post">
+
+                        <input type="hidden" name="Name" value="@Model._embedded.attractions[i].name" />
+                        <input type="hidden" name="Type" value="@Model._embedded.attractions[i].type" />
+                        <input type="hidden" name="Url" value="@Model._embedded.attractions[i].url" />
+                        <input type="hidden" name="Locale" value="@Model._embedded.attractions[i].locale" />
+                        <button type="submit" name="Submit" class="btn btn-outline-success">Add to Favourite</button>
+
+                    </form>
+                </td>
             </tr>
         }
 
-    </table><br />
+
+
+    </table>
+    <br />
     <form action="../TicketMaster/GetEventList" method="post">
         <input type="submit" name="page" value="1" placeholder="1" />
         <input type="submit" name="page" value="2" placeholder="2" />
         <input type="submit" name="page" value="3" placeholder="3" />
     </form>
 
-    @*<form action="../TicketMaster/GetEventList" method="post">
-
-        </form>*@
 </div>
