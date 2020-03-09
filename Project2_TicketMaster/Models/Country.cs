@@ -8,7 +8,6 @@ namespace Project2_TicketMaster.Models
     public enum Country
     {
         us,
-        mx,
         ca
     }
 }

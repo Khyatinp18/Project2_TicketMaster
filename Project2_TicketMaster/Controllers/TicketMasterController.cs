@@ -34,6 +34,25 @@ namespace Project2_TicketMaster.Controllers
         {
             return View("GetEventByCountry");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> GetEventByCountry(string country, int page)
+        {
+            int pageOption;
+            if (page == 0)
+            {
+                pageOption = 0;
+            }
+
+            else
+            {
+                pageOption = page;
+            }
+            var response = await _client.GetAsync($"attractions.json?preferredCountry={country}&page={pageOption}&apikey={ticketMasterApiKey}");
+            var events = await response.Content.ReadAsAsync<EventRootobject>();
+            return View("GetEventList", events);
+        }
+
         [HttpPost]
         public async Task<IActionResult> GetEventBySource(string source, int page)
         {
@@ -47,7 +66,7 @@ namespace Project2_TicketMaster.Controllers
             {
                 pageOption = page;
             }
-            var response = await _client.GetAsync($"attractions.json?apikey={ticketMasterApiKey}&page={pageOption}&source={source}");
+            var response = await _client.GetAsync($"attractions.json?source={source}&page={pageOption}&apikey={ticketMasterApiKey}");
             var events = await response.Content.ReadAsAsync<EventRootobject>();
             return View("GetEventList",events);
         }
@@ -77,7 +96,5 @@ namespace Project2_TicketMaster.Controllers
         {
             return View();
         }
-
-        
     }
 }
