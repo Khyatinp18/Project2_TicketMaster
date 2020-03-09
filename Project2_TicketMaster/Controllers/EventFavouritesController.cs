@@ -19,22 +19,27 @@ namespace Project2_TicketMaster.Controllers
         public EventFavouritesController(EventFavouritesContext context)
         {
             _context = context;
-        }
-
+        }       
+ 
         public IActionResult AddToFavorites(Attraction attraction)
         {
             string id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             Favourite newfavourite = new Favourite { OwnerId = id, Name = attraction.name, EventType = attraction.type, Url = attraction.url, Locale = attraction.locale };
+            
             if (ModelState.IsValid)
             {
                 _context.Favourite.Add(newfavourite);
                 _context.SaveChanges();
+
+                return RedirectToAction("FavouriteList");
             }
-            return RedirectToAction("FavouriteList");
+            else
+            {
+                return RedirectToAction("GetEventList");
+            }
         }
 
-
-        public IActionResult FavouriteList(Favourite newFavourite)
+        public IActionResult FavouriteList()
         {
             string id = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             List<Favourite> favouriteList = _context.Favourite.Where(x => x.OwnerId == id).ToList();
