@@ -4,17 +4,19 @@
 }
 @model List<Favourite>
 
-<h1>Your Favorites</h1>
+<h1 style="text-align:center;"> Your Favourites</h1>
 
 <div>
     <table style="text-align:center;" class="table table-bordered ">
-        <tr>
-            <th>Name</th>
-            <th>Attraction Type</th>
-            <th>Url</th>
-            <th>Location</th>
-            <th>Remove From Favourites</th>
-        </tr>
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Attraction Type</th>
+                <th>Url</th>
+                <th>Location</th>
+                <th>Remove From Favourites</th>
+            </tr>
+        </thead>
 
         @foreach (Favourite favourite in Model)
         {

@@ -4,7 +4,7 @@
 
 @model EventRootobject
 
-<h1>Event's</h1>
+<h1 style="text-align:center;">Events</h1>
 <div>
     <form action="../TicketMaster/GetEventList" method="post">
         <input type="submit" name="page" value="1" placeholder="1" />
@@ -13,14 +13,16 @@
     </form>
     <br />
     <table style="text-align:center;" class="table table-bordered ">
-        <tr>
-            <th>Name</th>
-            <th>Attraction Type</th>
-            <th>Url</th>
-            <th>Location</th>
-            <th>Image</th>
-            <th>Add to Favourites</th>
-        </tr>
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Attraction Type</th>
+                <th>Url</th>
+                <th>Location</th>
+                <th>Image</th>
+                <th>Add to Favourites</th>
+            </tr>
+        </thead>
         @for (int i = 0; i < Model._embedded.attractions.Length; i++)
         {
             <tr>
